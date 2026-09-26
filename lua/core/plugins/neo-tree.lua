@@ -17,6 +17,12 @@ require('neo-tree').setup {
       ['<space>'] = 'none',
     },
   },
+
+  default_component_configs = {
+    indent = {
+      padding = 2,
+    },
+  },
 }
 
 vim.api.nvim_create_autocmd({ 'FileType', 'WinEnter' }, {
