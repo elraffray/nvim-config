@@ -3,7 +3,7 @@
 require 'core.plugins.guess-indent'
 require 'core.plugins.gitsigns'
 require 'core.plugins.which-key'
-require 'core.plugins.tokyonight'
+require 'core.plugins.catppuccin'
 require 'core.plugins.todo-comments'
 require 'core.plugins.mini'
 require 'core.plugins.telescope'
