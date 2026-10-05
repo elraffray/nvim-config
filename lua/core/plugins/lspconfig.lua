@@ -187,4 +187,7 @@ for name, server in pairs(servers) do
   vim.lsp.enable(name)
 end
 
+-- Enable inlay hints by default
+vim.lsp.inlay_hint.enable(true)
+
 -- vim: ts=2 sts=2 sw=2 et
