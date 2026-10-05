@@ -12,6 +12,8 @@ require('conform').setup {
       python = true,
       rust = true,
       nix = true,
+      javascript = true,
+      markdown = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
       return { timeout_ms = 500 }
