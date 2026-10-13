@@ -56,4 +56,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Use html django syntax to hightlight askama templates
+vim.treesitter.language.register('htmldjango', 'askama_template')
+
 -- vim: ts=2 sts=2 sw=2 et

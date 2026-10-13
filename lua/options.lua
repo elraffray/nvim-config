@@ -84,4 +84,12 @@ vim.o.confirm = true
 -- Enables 24-bit RGB Color
 vim.opt.termguicolors = true
 
+-- Add support for Askama template extension
+vim.filetype.add {
+  pattern = {
+    -- Matches any file ending in .askama.html
+    ['.*%.askama%.html'] = 'askama_template',
+  },
+}
+
 -- vim: ts=2 sts=2 sw=2 et

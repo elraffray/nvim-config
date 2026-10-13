@@ -3,7 +3,7 @@ local function gh(repo) return 'https://github.com/' .. repo end
 -- [[ Formatting ]]
 vim.pack.add { gh 'stevearc/conform.nvim' }
 require('conform').setup {
-  notify_on_error = false,
+  notify_on_error = true,
   format_on_save = function(bufnr)
     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
     -- You can specify filetypes to autoformat on save here:
@@ -14,6 +14,8 @@ require('conform').setup {
       nix = true,
       javascript = true,
       markdown = true,
+      html = true,
+      askama_template = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
       return { timeout_ms = 500 }
@@ -33,6 +35,16 @@ require('conform').setup {
     -- You can use 'stop_after_first' to run the first available formatter from the list
     javascript = { 'prettierd', 'prettier', stop_after_first = true },
     markdown = { 'prettierd' },
+    html = { 'prettierd' },
+    askama_template = { 'askama_fmt' },
+  },
+
+  formatters = {
+    askama_fmt = {
+      command = 'askama_fmt',
+      args = { '$FILENAME' },
+      stdin = false,
+    },
   },
 }
 
