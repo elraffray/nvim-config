@@ -53,7 +53,40 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Execute a code action, usually your cursor needs to be on top of an error
     -- or a suggestion from your LSP for this to activate.
-    map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+    vim.keymap.set('n', 'gra', function()
+      local cursor = vim.api.nvim_win_get_cursor(0)
+      local row = cursor[1] -- 1-based
+      local col = cursor[2] -- 0-based
+
+      -- Get diagnostics for the current line (0-based)
+      local diagnostics = vim.diagnostic.get(0, { lnum = row - 1 })
+
+      -- Check if your cursor is currently directly on a diagnostic
+      local cursor_on_diag = false
+      for _, d in ipairs(diagnostics) do
+        if col >= d.col and col <= (d.end_col or d.col) then
+          cursor_on_diag = true
+          break
+        end
+      end
+
+      -- If you are already on an error, or there are no errors on the line,
+      -- use default behavior. This completely preserves word-level suggestions.
+      if cursor_on_diag or #diagnostics == 0 then
+        vim.lsp.buf.code_action()
+        return
+      end
+
+      -- If there is an error on the line but you aren't on it,
+      -- target the exact range of the first error on the line.
+      local first_diag = diagnostics[1]
+      vim.lsp.buf.code_action {
+        range = {
+          ['start'] = { row, first_diag.col },
+          ['end'] = { row, first_diag.end_col or first_diag.col },
+        },
+      }
+    end, { desc = '[G]oto Code [A]ction' })
 
     -- WARN: This is not Goto Definition, this is Goto Declaration.
     --  For example, in C this would take you to the header.
