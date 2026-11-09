@@ -76,7 +76,7 @@ local function format_toggle(is_global)
   end
 end
 
-vim.keymap.set({ 'n' }, '<leader>tf', function() format_toggle(false) end, { desc = '[T]oggle [f]ormat on-save for current buffer' })
-vim.keymap.set({ 'n' }, '<leader>tF', function() format_toggle(true) end, { desc = '[T]oggle [F]ormat on-save globally' })
+vim.keymap.set({ 'n' }, '<leader>cf', function() format_toggle(false) end, { desc = '[T]oggle [f]ormat on-save for current buffer' })
+vim.keymap.set({ 'n' }, '<leader>cF', function() format_toggle(true) end, { desc = '[T]oggle [F]ormat on-save globally' })
 
 -- vim: ts=2 sts=2 sw=2 et
