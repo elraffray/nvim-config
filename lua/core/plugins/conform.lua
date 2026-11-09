@@ -13,9 +13,12 @@ require('conform').setup {
       rust = true,
       nix = true,
       javascript = true,
+      typescript = true,
+      typescriptreact = true,
       markdown = true,
       html = true,
       askama_template = true,
+      css = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
       return { timeout_ms = 500 }
@@ -34,8 +37,11 @@ require('conform').setup {
     --
     -- You can use 'stop_after_first' to run the first available formatter from the list
     javascript = { 'prettierd', 'prettier', stop_after_first = true },
+    typescript = { 'prettierd', 'prettier', stop_after_first = true },
+    typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
     markdown = { 'prettierd' },
     html = { 'prettierd' },
+    css = { 'prettierd' },
     askama_template = { 'askama_fmt' },
   },
 
